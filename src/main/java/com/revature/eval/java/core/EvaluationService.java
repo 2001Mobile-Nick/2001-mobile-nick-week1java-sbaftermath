@@ -3,6 +3,8 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EvaluationService {
 
@@ -31,7 +33,13 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String newAcronym = "";
+		String[] str = phrase.split(" |-");
+		for (String i : str) {
+			newAcronym += i.charAt(0);
+		}
+		newAcronym = newAcronym.toUpperCase();
+		return newAcronym;
 	}
 
 	/**
@@ -85,17 +93,32 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo && sideTwo == sideThree) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne != sideTwo && sideTwo != sideThree) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 	}
@@ -117,7 +140,58 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		String word = string.toUpperCase();
+		char[] charword = word.toCharArray();
+		for (int i = 0 ; i < charword.length; i++) {
+			char calculatedScore = word.charAt(i);
+			switch (calculatedScore) {
+			case 'A':
+			case 'E':
+			case 'I':
+			case 'L':
+			case 'N':
+			case 'O':
+			case 'R':
+			case 'S':
+			case 'T':
+			case 'U':
+				score += 1;
+				break;
+			case 'D':
+			case 'G':
+				score += 2;
+				break;
+			case 'B':
+			case 'C':
+			case 'M':
+			case 'P':
+				score +=3;
+				break;
+			case 'F':
+			case 'H':
+			case 'V':
+			case 'W':
+			case 'Y':
+				score += 4;
+				break;
+			case 'K':
+				score += 5;
+				break;
+			case 'J':
+			case 'X':
+				score += 8;
+				break;
+			case 'Q':
+			case 'Z':
+				score += 10;
+				break;
+				default:
+					break;
+				
+			}
+		}
+		return score;
 	}
 
 	/**
@@ -153,7 +227,13 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String cleanNumber = string.replaceAll("\\D", "");
+		if (cleanNumber.length() != 10) {
+			throw new IllegalArgumentException("this phone number is illegal");
+		}
+		else {
+			return cleanNumber;
+		}
 	}
 
 	/**
@@ -167,7 +247,12 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> mapA = new HashMap<>();
+		String[] words = string.split("\\W+");
+		for (String i : words) {
+			mapA.merge(i, 1, (a, b)  -> a + b);
+		}
+		return mapA;
 	}
 
 	/**
@@ -210,6 +295,8 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+			
+			
 			return 0;
 		}
 
@@ -247,7 +334,31 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		int index = -1;
+		String[] stringArr = string.split(" ");
+		String pigLatin = "";
+		for (int j = 0; j < stringArr.length; j++) {
+			for (int i = 0; i < stringArr[j].length(); i++) {
+				if (string.charAt(i) == ('a'|'A'|'e'|'E'|'i'|'I'|'o'|'O'|'u'|'U')) {
+					index = i;
+					//System.out.println(index);
+					break;
+				}
+			}
+			if (index == - 1) {
+				System.out.println();
+			}
+			else {
+				if (j == 0 && index != -1) {
+					pigLatin += stringArr[j].substring(index) + stringArr[j].substring(0, index) + "ay";
+				}
+				if (j != 0 && index != -1) {
+					pigLatin += " " + stringArr[j].substring(index) + stringArr[j].substring(0, index) + "ay";
+				}
+			}
+			}
+		//sSystem.out.println(pigLatin);
+		return pigLatin;
 	}
 
 	/**
@@ -267,7 +378,24 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		int number = input;
+		int exponential = 1;
+		int armstrongnumber = 0;
+		while (number > 0) {
+			int digit = number%10;
+			number = number / 10;
+			for (int i = 1; i < (Math.log10(input) + 1); i++) {
+				exponential = exponential * digit;
+			}
+			armstrongnumber = armstrongnumber + exponential;
+			exponential = 1;
+		}
+		if (armstrongnumber == input) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -282,7 +410,23 @@ public class EvaluationService {
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		long number = l;
+		int index = 0;
+		List<Long> listLong = new ArrayList<Long>();
+		while (number % 2 ==0) {
+			listLong.add((long) 2);
+			number /= 2;
+		}
+		for (int i = 3; i <= Math.sqrt(number); i+= 2) {
+			while (number%i == 0) {
+				listLong.add((long)i);
+				number /= i;
+			}
+		}
+		if (number > 2) {
+			listLong.add(number);
+		}
+		return listLong;
 	}
 
 	/**
@@ -321,6 +465,8 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
+			
+			
 			return null;
 		}
 
@@ -340,7 +486,27 @@ public class EvaluationService {
 	 */
 	public int calculateNthPrime(int i) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int MAX_SIZE = 10000 * i;
+		boolean prime[] = new boolean[MAX_SIZE + 1];
+		int nthPrime[] = new int[MAX_SIZE];
+		int t = 0;
+		for (int j = 0; j < MAX_SIZE; j++) {
+			prime[j] = true;
+		}
+		for (int p = 2; p*p < MAX_SIZE; p++) {
+			if (prime[p] == true) {
+				for (int k = p*p; k <= MAX_SIZE; k += p) {
+					prime[k] = false;
+				}
+			}
+		}
+		for (int l = 2; l <= MAX_SIZE; l++) {
+			if (prime[l] == true) {
+				nthPrime[t] = l;
+				t++;
+			}
+		}
+		return nthPrime[i-1];
 	}
 
 	/**
@@ -434,7 +600,19 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		Map<String, Integer> mapA = new HashMap<>();
+		String[] words = string.split("");
+		System.out.println(words);
+		for (String i : words) {
+			mapA.merge(i, 1, (a, b)  -> a + b);
+		}
+		System.out.println(mapA.size());
+		if (mapA.size() == 26) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
