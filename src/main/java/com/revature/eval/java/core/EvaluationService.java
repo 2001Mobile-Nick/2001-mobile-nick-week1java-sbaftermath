@@ -334,7 +334,7 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		int index = -1;
+		int index = 0;
 		String[] stringArr = string.split(" ");
 		String pigLatin = "";
 		for (int j = 0; j < stringArr.length; j++) {
@@ -506,7 +506,12 @@ public class EvaluationService {
 				t++;
 			}
 		}
-		return nthPrime[i-1];
+		if (i != 0) {
+			return nthPrime[i-1];
+		}
+		else {
+			throw new IllegalArgumentException("No numbers smaller than 1");
+		}
 	}
 
 	/**
@@ -541,8 +546,30 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
+		public static String key(String string) {
+			Map<String, String> mapKey = new HashMap<>();
+			String a = "abcdefghijklmnopqrstuvwxyz";
+			String b = "zyxwvutsrqponmlkjihgfedcba";
+			String[] forward = a.split("");
+			String[] backward = b.split("");
+			for (int i = 0; i < 26; i++) {
+				mapKey.put(forward[i], backward[i]);
+			}
+			return mapKey.get(string);
+		}
+		
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
+			String line = string.replaceAll("\\W", "").toLowerCase();
+			String[] encode = line.split("");
+			String coded = "";
+			for (int i = 0; i < encode.length; i++) {
+				coded += key(encode[i]);
+			}
+			System.out.println(coded);
+			for  (int j = 0; j < 26; j++) {
+				//System.out.println(key(forward[j]));
+			}
 			return null;
 		}
 
@@ -587,9 +614,17 @@ public class EvaluationService {
 		String[] wordNumbers = string.replaceAll("-","").split("");
 		int[] numbers = new int[10];
 		for (int i = 0; i < 10; i++ ) {
-			if (wordNumbers[i] == "X") {
-				numbers[i] = 10;
-			}
+			if (wordNumbers[i].matches("\\D") == true) {
+				if (wordNumbers[i].contains("X") == true) {
+					numbers[i] = 10;
+				}
+				else {
+					return false;
+				}
+			}			
+			//try if statement that checks for letter then if for X and not X
+			//matches method maybe?
+			
 			//else if (wordNumbers[i] != ("X"||"1"||"2"||"3")
 			else {
 				numbers[i] = Integer.parseInt(wordNumbers[i]);
