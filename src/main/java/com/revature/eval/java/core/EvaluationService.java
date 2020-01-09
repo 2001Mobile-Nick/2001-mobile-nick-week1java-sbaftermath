@@ -566,6 +566,7 @@ public class EvaluationService {
 			for (int i = 0; i < encode.length; i++) {
 				coded += key(encode[i]);
 			}
+			// coded line is made just need to add the spaces every 5 characters
 			System.out.println(coded);
 			for  (int j = 0; j < 26; j++) {
 				//System.out.println(key(forward[j]));
