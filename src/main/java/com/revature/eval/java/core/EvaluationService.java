@@ -582,7 +582,28 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		
+		int total = 0;
+		String[] wordNumbers = string.replaceAll("-","").split("");
+		int[] numbers = new int[10];
+		for (int i = 0; i < 10; i++ ) {
+			if (wordNumbers[i] == "X") {
+				numbers[i] = 10;
+			}
+			//else if (wordNumbers[i] != ("X"||"1"||"2"||"3")
+			else {
+				numbers[i] = Integer.parseInt(wordNumbers[i]);
+			}
+		}
+		for (int i = 0; i < 10; i ++) {
+			total = total + numbers[i] * (10 - i);
+		}
+		if (total%11 == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -601,12 +622,10 @@ public class EvaluationService {
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
 		Map<String, Integer> mapA = new HashMap<>();
-		String[] words = string.split("");
-		System.out.println(words);
+		String[] words = string.replaceAll(" ","").split("");
 		for (String i : words) {
 			mapA.merge(i, 1, (a, b)  -> a + b);
 		}
-		System.out.println(mapA.size());
 		if (mapA.size() == 26) {
 			return true;
 		}
@@ -643,6 +662,7 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
+		
 		return 0;
 	}
 
