@@ -478,19 +478,22 @@ public class EvaluationService {
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
 			String newString = "";
-			int len = string.length();
-			for (int i = 0; i < len; i++) {
-				char character = (char) (string.charAt(i) + key);
-				if (Character.isLetter(character) == true) {
-					if (character > 'z')
-						newString += (char) (string.charAt(i) - (26 - key));
-					else
-						newString += (char) (string.charAt(i) + key);
+			for (int i = 0; i < string.length(); i++) {
+				if (Character.isLetter(string.charAt(i)) == true) {
+
+					if (Character.isUpperCase(string.charAt(i))) {
+						char character = (char) (((int) string.charAt(i) + key - 65) % 26 + 65);
+						newString += character;
+					} else {
+						char character = (char) (((int) string.charAt(i) + key - 97) % 26 + 97);
+						newString += character;
+					}
 				}
 				else {
-					newString += (char) string.charAt(i);
+					newString += string.charAt(i);
 				}
 			}
+
 			System.out.println(newString);
 			return newString;
 		}
@@ -782,7 +785,7 @@ public class EvaluationService {
 		int sum = 0;
 		boolean isSecond = false;
 		String number = string.replaceAll("\\D", "");
-		//System.out.println(number);
+		// System.out.println(number);
 		for (int i = number.length() - 1; i >= 0; i--) {
 			int d = number.charAt(i);
 			if (isSecond == true) {
@@ -795,7 +798,7 @@ public class EvaluationService {
 			sum += d;
 			isSecond = !isSecond;
 		}
-		//System.out.println(sum);
+		// System.out.println(sum);
 		if (sum % 10 == 0) {
 			return true;
 		} else {
