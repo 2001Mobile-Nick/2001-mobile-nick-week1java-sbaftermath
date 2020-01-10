@@ -3,8 +3,12 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
 
 public class EvaluationService {
 
@@ -295,9 +299,30 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
+			if (!(t instanceof Comparable)) {
+				throw new IllegalArgumentException();
+			}
+			List<Comparable> list = (List<Comparable>) sortedList;
+			Comparable item = (Comparable) t;
 			
+			int left = 0;
+			int right = list.size() - 1;
 			
-			return 0;
+			while (left <= right) {
+				int cur = (left + right) / 2;
+				int compareResult = item.compareTo(list.get(cur));
+				if (compareResult == 0) {
+					return cur;
+				}
+				if (compareResult < 0) {
+					right = cur - 1;
+				}
+				else {
+					left = cur + 1;
+				}
+			}
+			
+			return -1;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -334,31 +359,27 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		int index = 0;
+		int index = - 1 ;
 		String[] stringArr = string.split(" ");
 		String pigLatin = "";
-		for (int j = 0; j < stringArr.length; j++) {
-			for (int i = 0; i < stringArr[j].length(); i++) {
-				if (string.charAt(i) == ('a'|'A'|'e'|'E'|'i'|'I'|'o'|'O'|'u'|'U')) {
-					index = i;
-					//System.out.println(index);
-					break;
+		for (int i = 0; i < string.length(); i++) {
+			if (isVowel(string.charAt(i))) {
+				index = i;
+				//System.out.println(index);
+				break;
 				}
-			}
-			if (index == - 1) {
-				System.out.println();
-			}
-			else {
-				if (j == 0 && index != -1) {
-					pigLatin += stringArr[j].substring(index) + stringArr[j].substring(0, index) + "ay";
-				}
-				if (j != 0 && index != -1) {
-					pigLatin += " " + stringArr[j].substring(index) + stringArr[j].substring(0, index) + "ay";
-				}
-			}
+		}
+		
+		if (index != -1) {
+			pigLatin += string.substring(index) + string.substring(0, index) + "ay";
 			}
 		//sSystem.out.println(pigLatin);
 		return pigLatin;
+	}
+	
+	public boolean isVowel(char c) {
+		return (c =='A' || c =='E'|| c == 'I'|| c == 'O'||c =='U' || 
+				c == 'a' || c == 'e'|| c == 'i' || c == 'o' || c == 'u');
 	}
 
 	/**
@@ -411,7 +432,6 @@ public class EvaluationService {
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
 		long number = l;
-		int index = 0;
 		List<Long> listLong = new ArrayList<Long>();
 		while (number % 2 ==0) {
 			listLong.add((long) 2);
@@ -465,6 +485,7 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
+			
 			
 			
 			return null;
@@ -568,7 +589,7 @@ public class EvaluationService {
 			}
 			// coded line is made just need to add the spaces every 5 characters
 			String finalCode = coded.replaceAll("(.{" + "5" + "})", "$1 ").trim(); 
-			System.out.println(finalCode);
+			//sSystem.out.println(finalCode);
 			return finalCode;
 		}
 
@@ -705,8 +726,19 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
+		int sum = 0;
+		Set<Integer> multiples = new HashSet<>();
+		for (int cur : set) {
+			for (int j = 1; cur * j < i; j++) {
+				multiples.add(cur * j);
+			}
+		}
 		
-		return 0;
+		Iterator<Integer> it = multiples.iterator();
+		while (it.hasNext()) {
+			sum += it.next();
+		}
+		return sum;
 	}
 
 	/**
@@ -747,7 +779,28 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		int sum = 0;
+		boolean isSecond = false;
+		String number = string.replaceAll("\\D", "");
+		System.out.println(number);
+		for (int i = number.length() - 1; i >+ 0 ; i--) {
+			int d = number.charAt(i) - '0';
+			if (isSecond == true) {
+				d = d * 2;
+				if (d > 9) {
+					d = (d %10 ) + 1;
+				}
+			}
+			
+			sum += d;
+			isSecond = !isSecond;
+		}
+		if (sum % 10 == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
