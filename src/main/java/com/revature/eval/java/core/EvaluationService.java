@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
@@ -711,7 +712,10 @@ public class EvaluationService {
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		Temporal newTime = given.plus(1000000000L, ChronoUnit.SECONDS);
+		
+		return newTime;
 	}
 
 	/**
