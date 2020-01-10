@@ -304,15 +304,15 @@ public class EvaluationService {
 			int right = list.size() - 1;
 
 			while (left <= right) {
-				int cur = (left + right) / 2;
-				int compareResult = item.compareTo(list.get(cur));
+				int current = (left + right) / 2;
+				int compareResult = item.compareTo(list.get(current));
 				if (compareResult == 0) {
-					return cur;
+					return current;
 				}
 				if (compareResult < 0) {
-					right = cur - 1;
+					right = current - 1;
 				} else {
-					left = cur + 1;
+					left = current + 1;
 				}
 			}
 
@@ -477,8 +477,22 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-
-			return null;
+			String newString = "";
+			int len = string.length();
+			for (int i = 0; i < len; i++) {
+				char character = (char) (string.charAt(i) + key);
+				if (Character.isLetter(character) == true) {
+					if (character > 'z')
+						newString += (char) (string.charAt(i) - (26 - key));
+					else
+						newString += (char) (string.charAt(i) + key);
+				}
+				else {
+					newString += (char) string.charAt(i);
+				}
+			}
+			System.out.println(newString);
+			return newString;
 		}
 
 	}
@@ -768,8 +782,8 @@ public class EvaluationService {
 		int sum = 0;
 		boolean isSecond = false;
 		String number = string.replaceAll("\\D", "");
-		System.out.println(number);
-		for (int i = number.length() - 1; i > +0; i--) {
+		//System.out.println(number);
+		for (int i = number.length() - 1; i >= 0; i--) {
 			int d = number.charAt(i);
 			if (isSecond == true) {
 				d = d * 2;
@@ -781,6 +795,7 @@ public class EvaluationService {
 			sum += d;
 			isSecond = !isSecond;
 		}
+		//System.out.println(sum);
 		if (sum % 10 == 0) {
 			return true;
 		} else {
@@ -821,16 +836,16 @@ public class EvaluationService {
 		int second = 0;
 		int count = 0;
 		String temp;
-		int other;
+		int number;
 		boolean negative = false;
 
 		for (int i = 0; i < string.length(); i++) {
 			if (Character.isDigit(string.charAt(i))) {
-				other = i + 1;
-				while (Character.isDigit(string.charAt(other))) {
-					other++;
+				number = i + 1;
+				while (Character.isDigit(string.charAt(number))) {
+					number++;
 				}
-				temp = string.substring(i, other);
+				temp = string.substring(i, number);
 				if (string.charAt(i - 1) == '-') {
 					negative = true;
 				}
@@ -847,7 +862,7 @@ public class EvaluationService {
 					}
 				}
 				count++;
-				i = other;
+				i = number;
 				negative = false;
 			}
 		}
