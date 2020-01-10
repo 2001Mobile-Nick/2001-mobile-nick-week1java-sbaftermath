@@ -564,14 +564,12 @@ public class EvaluationService {
 			String[] encode = line.split("");
 			String coded = "";
 			for (int i = 0; i < encode.length; i++) {
-				coded += key(encode[i]);
+					coded += key(encode[i]);
 			}
 			// coded line is made just need to add the spaces every 5 characters
-			System.out.println(coded);
-			for  (int j = 0; j < 26; j++) {
-				//System.out.println(key(forward[j]));
-			}
-			return null;
+			String finalCode = coded.replaceAll("(.{" + "5" + "})", "$1 ").trim(); 
+			System.out.println(finalCode);
+			return finalCode;
 		}
 
 		/**
@@ -582,7 +580,16 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			
+			String[] uncode = string.replaceAll(" ", "").split("");
+			for (int j = 0; j < uncode.length; j ++) {
+			}
+			String uncoded = "";
+			for (int i = 0; i < uncode.length; i ++) {
+				uncoded += key(uncode[i]);
+			}
+			//System.out.println(uncoded);
+			return uncoded;
 		}
 	}
 
