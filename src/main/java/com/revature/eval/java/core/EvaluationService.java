@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-
 public class EvaluationService {
 
 	/**
@@ -21,7 +20,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -99,8 +98,7 @@ public class EvaluationService {
 			// TODO Write an implementation for this method declaration
 			if (sideOne == sideTwo && sideTwo == sideThree) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -109,8 +107,7 @@ public class EvaluationService {
 			// TODO Write an implementation for this method declaration
 			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -119,8 +116,7 @@ public class EvaluationService {
 			// TODO Write an implementation for this method declaration
 			if (sideOne != sideTwo && sideTwo != sideThree) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -147,7 +143,7 @@ public class EvaluationService {
 		int score = 0;
 		String word = string.toUpperCase();
 		char[] charword = word.toCharArray();
-		for (int i = 0 ; i < charword.length; i++) {
+		for (int i = 0; i < charword.length; i++) {
 			char calculatedScore = word.charAt(i);
 			switch (calculatedScore) {
 			case 'A':
@@ -170,7 +166,7 @@ public class EvaluationService {
 			case 'C':
 			case 'M':
 			case 'P':
-				score +=3;
+				score += 3;
 				break;
 			case 'F':
 			case 'H':
@@ -190,9 +186,9 @@ public class EvaluationService {
 			case 'Z':
 				score += 10;
 				break;
-				default:
-					break;
-				
+			default:
+				break;
+
 			}
 		}
 		return score;
@@ -234,8 +230,7 @@ public class EvaluationService {
 		String cleanNumber = string.replaceAll("\\D", "");
 		if (cleanNumber.length() != 10) {
 			throw new IllegalArgumentException("this phone number is illegal");
-		}
-		else {
+		} else {
 			return cleanNumber;
 		}
 	}
@@ -254,7 +249,7 @@ public class EvaluationService {
 		Map<String, Integer> mapA = new HashMap<>();
 		String[] words = string.split("\\W+");
 		for (String i : words) {
-			mapA.merge(i, 1, (a, b)  -> a + b);
+			mapA.merge(i, 1, (a, b) -> a + b);
 		}
 		return mapA;
 	}
@@ -304,10 +299,10 @@ public class EvaluationService {
 			}
 			List<Comparable> list = (List<Comparable>) sortedList;
 			Comparable item = (Comparable) t;
-			
+
 			int left = 0;
 			int right = list.size() - 1;
-			
+
 			while (left <= right) {
 				int cur = (left + right) / 2;
 				int compareResult = item.compareTo(list.get(cur));
@@ -316,12 +311,11 @@ public class EvaluationService {
 				}
 				if (compareResult < 0) {
 					right = cur - 1;
-				}
-				else {
+				} else {
 					left = cur + 1;
 				}
 			}
-			
+
 			return -1;
 		}
 
@@ -359,27 +353,26 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		int index = - 1 ;
-		String[] stringArr = string.split(" ");
+		int index = -1;
 		String pigLatin = "";
 		for (int i = 0; i < string.length(); i++) {
 			if (isVowel(string.charAt(i))) {
 				index = i;
-				//System.out.println(index);
+				// System.out.println(index);
 				break;
-				}
+			}
 		}
-		
+
 		if (index != -1) {
 			pigLatin += string.substring(index) + string.substring(0, index) + "ay";
-			}
-		//sSystem.out.println(pigLatin);
+		}
+		// sSystem.out.println(pigLatin);
 		return pigLatin;
 	}
-	
+
 	public boolean isVowel(char c) {
-		return (c =='A' || c =='E'|| c == 'I'|| c == 'O'||c =='U' || 
-				c == 'a' || c == 'e'|| c == 'i' || c == 'o' || c == 'u');
+		return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'a' || c == 'e' || c == 'i' || c == 'o'
+				|| c == 'u');
 	}
 
 	/**
@@ -403,7 +396,7 @@ public class EvaluationService {
 		int exponential = 1;
 		int armstrongnumber = 0;
 		while (number > 0) {
-			int digit = number%10;
+			int digit = number % 10;
 			number = number / 10;
 			for (int i = 1; i < (Math.log10(input) + 1); i++) {
 				exponential = exponential * digit;
@@ -413,8 +406,7 @@ public class EvaluationService {
 		}
 		if (armstrongnumber == input) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -433,13 +425,13 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		long number = l;
 		List<Long> listLong = new ArrayList<Long>();
-		while (number % 2 ==0) {
+		while (number % 2 == 0) {
 			listLong.add((long) 2);
 			number /= 2;
 		}
-		for (int i = 3; i <= Math.sqrt(number); i+= 2) {
-			while (number%i == 0) {
-				listLong.add((long)i);
+		for (int i = 3; i <= Math.sqrt(number); i += 2) {
+			while (number % i == 0) {
+				listLong.add((long) i);
 				number /= i;
 			}
 		}
@@ -485,9 +477,7 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			
-			
-			
+
 			return null;
 		}
 
@@ -514,9 +504,9 @@ public class EvaluationService {
 		for (int j = 0; j < MAX_SIZE; j++) {
 			prime[j] = true;
 		}
-		for (int p = 2; p*p < MAX_SIZE; p++) {
+		for (int p = 2; p * p < MAX_SIZE; p++) {
 			if (prime[p] == true) {
-				for (int k = p*p; k <= MAX_SIZE; k += p) {
+				for (int k = p * p; k <= MAX_SIZE; k += p) {
 					prime[k] = false;
 				}
 			}
@@ -528,9 +518,8 @@ public class EvaluationService {
 			}
 		}
 		if (i != 0) {
-			return nthPrime[i-1];
-		}
-		else {
+			return nthPrime[i - 1];
+		} else {
 			throw new IllegalArgumentException("No numbers smaller than 1");
 		}
 	}
@@ -578,18 +567,18 @@ public class EvaluationService {
 			}
 			return mapKey.get(string);
 		}
-		
+
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
 			String line = string.replaceAll("\\W", "").toLowerCase();
 			String[] encode = line.split("");
 			String coded = "";
 			for (int i = 0; i < encode.length; i++) {
-					coded += key(encode[i]);
+				coded += key(encode[i]);
 			}
 			// coded line is made just need to add the spaces every 5 characters
-			String finalCode = coded.replaceAll("(.{" + "5" + "})", "$1 ").trim(); 
-			//sSystem.out.println(finalCode);
+			String finalCode = coded.replaceAll("(.{" + "5" + "})", "$1 ").trim();
+			// sSystem.out.println(finalCode);
 			return finalCode;
 		}
 
@@ -601,15 +590,15 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TODO Write an implementation for this method declaration
-			
+
 			String[] uncode = string.replaceAll(" ", "").split("");
-			for (int j = 0; j < uncode.length; j ++) {
+			for (int j = 0; j < uncode.length; j++) {
 			}
 			String uncoded = "";
-			for (int i = 0; i < uncode.length; i ++) {
+			for (int i = 0; i < uncode.length; i++) {
 				uncoded += key(uncode[i]);
 			}
-			//System.out.println(uncoded);
+			// System.out.println(uncoded);
 			return uncoded;
 		}
 	}
@@ -638,34 +627,32 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-		
+
 		int total = 0;
-		String[] wordNumbers = string.replaceAll("-","").split("");
+		String[] wordNumbers = string.replaceAll("-", "").split("");
 		int[] numbers = new int[10];
-		for (int i = 0; i < 10; i++ ) {
+		for (int i = 0; i < 10; i++) {
 			if (wordNumbers[i].matches("\\D") == true) {
 				if (wordNumbers[i].contains("X") == true) {
 					numbers[i] = 10;
-				}
-				else {
+				} else {
 					return false;
 				}
-			}			
-			//try if statement that checks for letter then if for X and not X
-			//matches method maybe?
-			
-			//else if (wordNumbers[i] != ("X"||"1"||"2"||"3")
+			}
+			// try if statement that checks for letter then if for X and not X
+			// matches method maybe?
+
+			// else if (wordNumbers[i] != ("X"||"1"||"2"||"3")
 			else {
 				numbers[i] = Integer.parseInt(wordNumbers[i]);
 			}
 		}
-		for (int i = 0; i < 10; i ++) {
+		for (int i = 0; i < 10; i++) {
 			total = total + numbers[i] * (10 - i);
 		}
-		if (total%11 == 0) {
+		if (total % 11 == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -686,14 +673,13 @@ public class EvaluationService {
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
 		Map<String, Integer> mapA = new HashMap<>();
-		String[] words = string.replaceAll(" ","").split("");
+		String[] words = string.replaceAll(" ", "").split("");
 		for (String i : words) {
-			mapA.merge(i, 1, (a, b)  -> a + b);
+			mapA.merge(i, 1, (a, b) -> a + b);
 		}
 		if (mapA.size() == 26) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -733,7 +719,7 @@ public class EvaluationService {
 				multiples.add(cur * j);
 			}
 		}
-		
+
 		Iterator<Integer> it = multiples.iterator();
 		while (it.hasNext()) {
 			sum += it.next();
@@ -783,22 +769,21 @@ public class EvaluationService {
 		boolean isSecond = false;
 		String number = string.replaceAll("\\D", "");
 		System.out.println(number);
-		for (int i = number.length() - 1; i >+ 0 ; i--) {
-			int d = number.charAt(i) - '0';
+		for (int i = number.length() - 1; i > +0; i--) {
+			int d = number.charAt(i);
 			if (isSecond == true) {
 				d = d * 2;
 				if (d > 9) {
-					d = (d %10 ) + 1;
+					d = (d % 10) + 1;
 				}
 			}
-			
+
 			sum += d;
 			isSecond = !isSecond;
 		}
 		if (sum % 10 == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -832,7 +817,53 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int first = 0;
+		int second = 0;
+		int count = 0;
+		String temp;
+		int other;
+		boolean negative = false;
+
+		for (int i = 0; i < string.length(); i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				other = i + 1;
+				while (Character.isDigit(string.charAt(other))) {
+					other++;
+				}
+				temp = string.substring(i, other);
+				if (string.charAt(i - 1) == '-') {
+					negative = true;
+				}
+				if (count == 0) {
+					first = Integer.parseInt(temp);
+					if (negative == true) {
+						first *= -1;
+					}
+				} else if (count == 1) {
+					second = Integer.parseInt(temp);
+					if (negative == true) {
+						second *= -1;
+
+					}
+				}
+				count++;
+				i = other;
+				negative = false;
+			}
+		}
+		int result = 0;
+		if (string.contains("plus")) {
+			result = (first + second);
+		} else if (string.contains("minus")) {
+			result = (first - second);
+		} else if (string.contains("multiplied")) {
+			result = (first * second);
+		} else if (string.contains("divided")) {
+			result = first / second;
+		} else {
+			System.out.println("Not a valid question.");
+		}
+		return result;
 	}
 
 }
