@@ -838,7 +838,7 @@ public class EvaluationService {
 		int first = 0;
 		int second = 0;
 		int count = 0;
-		String temp;
+		String sentence;
 		int number;
 		boolean negative = false;
 
@@ -848,17 +848,17 @@ public class EvaluationService {
 				while (Character.isDigit(string.charAt(number))) {
 					number++;
 				}
-				temp = string.substring(i, number);
+				sentence = string.substring(i, number);
 				if (string.charAt(i - 1) == '-') {
 					negative = true;
 				}
 				if (count == 0) {
-					first = Integer.parseInt(temp);
+					first = Integer.parseInt(sentence);
 					if (negative == true) {
 						first *= -1;
 					}
 				} else if (count == 1) {
-					second = Integer.parseInt(temp);
+					second = Integer.parseInt(sentence);
 					if (negative == true) {
 						second *= -1;
 
