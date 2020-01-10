@@ -495,7 +495,7 @@ public class EvaluationService {
 				}
 			}
 
-			System.out.println(newString);
+			//System.out.println(newString);
 			return newString;
 		}
 
@@ -713,8 +713,8 @@ public class EvaluationService {
 	public Temporal getGigasecondDate(Temporal given) {
 		// TODO Write an implementation for this method declaration
 		
-		Temporal newTime = given.plus(1000000000L, ChronoUnit.SECONDS);
-		
+		Temporal newTime = given.plus(1000000000, ChronoUnit.SECONDS);
+		System.out.println(newTime);
 		return newTime;
 	}
 
@@ -735,9 +735,9 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		int sum = 0;
 		Set<Integer> multiples = new HashSet<>();
-		for (int cur : set) {
-			for (int j = 1; cur * j < i; j++) {
-				multiples.add(cur * j);
+		for (int current : set) {
+			for (int j = 1; current * j < i; j++) {
+				multiples.add(current * j);
 			}
 		}
 
